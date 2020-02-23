@@ -1,23 +1,30 @@
 {
-  "name": "searching-for-javascript-api",
-  "version": "1.0.0",
-  "description": "API to search #javascript on twitter",
-  "scripts": {
-    "start": "nodemon --exec \"yarn run start:once\" -w src -e js",
-    "start:once": "yarn run build && node lib/index.js",
-    "build": "babel src --out-dir lib --extensions='.js'",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "main": "index.js",
-  "author": "Heini Ahokas <ahokas.heini@gmail.com>",
-  "license": "MIT",
-  "dependencies": {
-    "express": "^4.17.1"
-  },
-  "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.8.4",
-    "@babel/preset-env": "^7.8.4",
-    "nodemon": "^2.0.2"
-  }
+	"name": "searching-for-javascript-api",
+	"version": "1.0.0",
+	"description": "API to search #javascript on twitter",
+	"scripts": {
+		"start": "nodemon --exec \"yarn run start:once\" -w src -e js",
+		"start:once": "yarn run build && node dist/index.js",
+		"build": "babel src --out-dir dist --extensions='.js'",
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"lint": "eslint ."
+	},
+	"main": "index.js",
+	"author": "Heini Ahokas <ahokas.heini@gmail.com>",
+	"license": "MIT",
+	"dependencies": {
+		"express": "^4.17.1"
+	},
+	"devDependencies": {
+		"@babel/cli": "^7.8.4",
+		"@babel/core": "^7.8.4",
+		"@babel/preset-env": "^7.8.4",
+		"eslint": "^6.8.0",
+		"eslint-config-airbnb": "^18.0.1",
+		"eslint-config-prettier": "^6.10.0",
+		"eslint-plugin-import": "^2.20.1",
+		"eslint-plugin-prettier": "^3.1.2",
+		"nodemon": "^2.0.2",
+		"prettier": "^1.19.1"
+	}
 }
