@@ -1,0 +1,15 @@
+{
+  "name": "searching-for-javascript",
+  "version": "1.0.0",
+  "description": "UI and API to search #javascript on twitter",
+  "scripts": {
+    "start": "concurrently \"cd backend && yarn start\" \"cd frontend && yarn start\" ",
+    "install": "concurrently \"cd backend && yarn\" \"cd frontend && yarn\" ",
+    "test": "concurrently \"cd backend && yarn test\" \"cd frontend && yarn test\" "
+  },
+  "author": "Heini Ahokas <ahokas.heini@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^5.1.0"
+  }
+}
