@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"description": "API to search #javascript on twitter",
 	"scripts": {
-		"start": "nodemon --exec \"yarn run start:once\" -w src -e js",
+		"start": "yarn lint && nodemon --exec \"yarn run start:once\" -w src -e js",
 		"start:once": "yarn run build && node dist/index.js",
 		"build": "babel src --out-dir dist --extensions='.js'",
 		"test": "echo \"Error: no test specified\" && exit 1",

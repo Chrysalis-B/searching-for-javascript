@@ -1,4 +1,4 @@
-import regeneratorRuntime from 'regenerator-runtime';
+import regeneratorRuntime from 'regenerator-runtime'; // eslint-disable-line no-unused-vars
 import express from 'express';
 import mongoose from 'mongoose';
 
@@ -18,7 +18,7 @@ const mongoConnection = async () => {
 };
 
 mongoConnection();
-var db = mongoose.connection;
+const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Mongo connection error:'));
 db.once('open', console.log.bind(console, 'Mongo connection established'));
 
