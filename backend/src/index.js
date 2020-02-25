@@ -1,6 +1,34 @@
-import express from "express";
+import regeneratorRuntime from 'regenerator-runtime';
+import express from 'express';
+import mongoose from 'mongoose';
 
 const port = 3001;
 const app = express();
+const databaseUrl = 'mongodb://localhost:27017/twitter';
+
+const mongoConnection = async () => {
+	try {
+		await mongoose.connect(databaseUrl, {
+			useNewUrlParser: true,
+			useUnifiedTopology: true
+		});
+	} catch (err) {
+        console.error('Mongo connection error: ', err);
+	}
+};
+
+mongoConnection();
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'Mongo connection error:'));
+db.once('open', console.log.bind(console, 'Mongo connection established'));
+
+app.use((req, res, next) => {
+	res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+	res.header(
+		'Access-Control-Allow-Headers',
+		'Origin, X-Requested-With, Content-Type, Accept'
+	);
+	next();
+});
 
 app.listen(port, () => console.log(`App is listening on port ${port}`));
