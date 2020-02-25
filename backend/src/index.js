@@ -4,9 +4,9 @@ import mongoose from 'mongoose';
 
 const port = 3001;
 const app = express();
-const databaseUrl = 'mongodb://localhost:27017/twitter';
+const databaseUrl = 'mongodb://localhost:27017/searching-for-javascript';
 
-const mongoConnection = async () => {
+(async () => {
 	try {
 		await mongoose.connect(databaseUrl, {
 			useNewUrlParser: true,
@@ -15,9 +15,8 @@ const mongoConnection = async () => {
 	} catch (err) {
         console.error('Mongo connection error: ', err);
 	}
-};
+})();
 
-mongoConnection();
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Mongo connection error:'));
 db.once('open', console.log.bind(console, 'Mongo connection established'));
