@@ -6,6 +6,8 @@ The repo consists of a node backend server and a React frontend.
 
 1. node 11 or higher
 2. yarn 1
+3. elasticSearch 7
+4. mongo 4
 
 ## Setup
 
