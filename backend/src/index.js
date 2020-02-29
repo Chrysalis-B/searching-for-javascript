@@ -1,11 +1,14 @@
 import regeneratorRuntime from 'regenerator-runtime'; // eslint-disable-line no-unused-vars
+import bodyParser from "body-parser";
 import express from 'express';
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 import scheduler from './services/twitter-scheduler';
+import mongoDbAdapter from './services/mongodb-adapter';
 // import { Client } from '@elastic/elasticsearch';
 import logger from './lib/logger';
 
-require('dotenv').config();
+dotenv.config();
 
 const port = 3001;
 const app = express();
@@ -37,5 +40,15 @@ app.use((req, res, next) => {
 	);
 	next();
 });
+
+app.use(bodyParser.json());
+
+app.post('/tweets', (req) => {
+    const tweets = req.body.statuses;
+    tweets.forEach( async (tweet) => {
+        await mongoDbAdapter.saveTweet(tweet);
+    });
+
+})
 
 app.listen(port, () => logger.log(`App is listening on port ${port}`));

@@ -1,19 +1,31 @@
-import TwitterUrl from '../models/twitter-url';
+import SinceId from '../models/since-id';
+import Tweet from '../models/tweet';
 
 const mongoDbAdapter = {
-	getNewestUrl: async () => {
-		const query = TwitterUrl.findOne({})
+	getSinceId: async () => {
+		const query = SinceId.findOne({})
 			.sort({_id: -1 })
 			.limit(1);
         const result = await query.exec();
-		return result;
+		return result ? result.sinceId : '0';
     },
-    saveNewestUrl: async (url) => {
-        const query = new TwitterUrl(
-            {queryUrl: url}
+    saveAsSinceId: async (maxId) => {
+        const query = new SinceId(
+            { sinceId: maxId }
         );
         const result = await query.save()
         return result;
+    },
+    saveTweet: async (tweet) => {
+        const tweetObject =  new Tweet({
+            created_at: tweet.created_at,
+            id: tweet.id_str,
+            text: tweet.text,
+            userId: tweet.user.id_str,
+            userName: tweet.user.name,
+            userImg: tweet.user.profile_image_url
+        });
+        await tweetObject.save();
     }
 };
 
