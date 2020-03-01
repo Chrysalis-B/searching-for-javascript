@@ -14,7 +14,7 @@ const schema = new mongoose.Schema(
 	{ collection: 'tweets' }
 );
 
-schema.plugin(mongoosastic, { hydrate: true, hydrateOptions: { sort: '-created_at', limit: 100  } });
+schema.plugin(mongoosastic, { hydrate: true, hydrateOptions: { sort: '-created_at', limit: 100 } });
 
 const Tweet = mongoose.model('Tweet', schema);
 
