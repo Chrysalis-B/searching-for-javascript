@@ -11,7 +11,8 @@ The repo consists of a node backend server and a React frontend.
 
 ## Setup
 
-Have mongo running on port `27017` and elasticSearch on port `9200`.
+The application expects mongo running on port `27017` and elasticSearch on port `9200`.
+The application expects the twitter api consumer key and secret to be saved as environment variables.
 
 To start the frontend & backend:
 

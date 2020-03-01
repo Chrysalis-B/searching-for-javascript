@@ -28,8 +28,8 @@ const mongoDbAdapter = {
 	searchTweets: async q => {
 		const result = await Tweet.search({
 			query_string: { query: q }
-        });
-        return result;
+		});
+		return result;
 	}
 };
 

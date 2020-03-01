@@ -2,7 +2,7 @@ import regeneratorRuntime from 'regenerator-runtime'; // eslint-disable-line no-
 import cors from 'cors';
 import express from 'express';
 import mongoose from 'mongoose';
-import scheduler from './services/twitter-scheduler';
+import twitterScheduler from './services/twitter-scheduler';
 import mongoDbAdapter from './services/mongodb-adapter';
 import logger from './lib/logger';
 
@@ -25,8 +25,7 @@ const db = mongoose.connection;
 db.on('error', logger.error.bind(logger, 'Mongo connection error:'));
 db.once('open', logger.log.bind(logger, 'Mongo connection established'));
 
-// TODO add comment
-scheduler();
+twitterScheduler();
 
 app.use(cors());
 
