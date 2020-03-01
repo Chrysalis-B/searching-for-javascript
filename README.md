@@ -11,8 +11,8 @@ The repo consists of a node backend server and a React frontend.
 
 ## Setup
 
-The application expects mongo running on port `27017` and elasticSearch on port `9200`.
-The application expects the twitter api consumer key and secret to be saved as environment variables.
+The application expects mongo running on port `27017` and elasticSearch on port `9200` and 
+the twitter api consumer key and secret to be saved as environment variables.
 
 To start the frontend & backend:
 
@@ -26,9 +26,9 @@ You can also start each part seperately by running `yarn start` in their respect
 ## Design decisions & approaches tried
 
 To pull tweets via the twitter API I decided to implement a cron job that calls the API at an interval within
-the rate limits of the twitter API: `backend/src/services/twitter-scheduler.js`. 
+the rate limits of the twitter API `backend/src/services/twitter-scheduler.js`. 
 The search query is #javascript and replies and retweets are filtered out. 
-The max_id of the result will be saved and used as a since_id for the following
+The `max_id` of the result will be saved and used as a `since_id` for the following
 request, so only tweets that have not yet been pulled will be included in the response.
 The tweets are then stored to mongo and elasticSearch in `backend/src/services/twitter-poster.js`.
 
@@ -54,5 +54,4 @@ I decided to use the Material-UI component library. This way I was able to imple
 
 Unfortunately due to time constraints tests are not implemented.
 
-
-
+Thank you for the time to review this project, I am looking forward to your feedback 🙋🏼‍♀️
