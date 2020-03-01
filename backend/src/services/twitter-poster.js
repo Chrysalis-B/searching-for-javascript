@@ -1,14 +1,16 @@
-import fetch from 'node-fetch';
 import logger from '../lib/logger';
+import mongoDbAdapter from './mongodb-adapter';
 
 const twitterPoster = tweets => {
-	fetch('http://localhost:3001/tweets', {
-		method: 'POST',
-		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify(tweets)
-	})
-		.then(res => logger.log(res))
-		.catch(err => logger.error(err));
+	try {
+		if (tweets.length > 0) {
+			tweets.forEach(async tweet => {
+				await mongoDbAdapter.saveTweet(tweet);
+			});
+		}
+	} catch (err) {
+		logger.error('Error in saving tweets', err);
+	}
 };
 
 export default twitterPoster;

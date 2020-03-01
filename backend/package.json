@@ -13,15 +13,12 @@
 	"author": "Heini Ahokas <ahokas.heini@gmail.com>",
 	"license": "MIT",
 	"dependencies": {
-		"bluebird": "^3.7.2",
-		"body-parser": "^1.19.0",
 		"cors": "^2.8.5",
 		"dotenv": "^8.2.0",
 		"express": "^4.17.1",
 		"mongoosastic": "^4.5.1",
 		"mongoose": "^5.9.2",
 		"node-cron": "^2.0.3",
-		"node-fetch": "^2.6.0",
 		"regenerator-runtime": "^0.13.3",
 		"signale": "^1.4.0",
 		"twitter-lite": "^0.9.4"

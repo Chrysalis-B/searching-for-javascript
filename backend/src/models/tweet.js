@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import mongoosastic from 'mongoosastic';
-import Promise from 'bluebird';
+import { promisify } from 'util';
 
 const schema = new mongoose.Schema(
 	{
@@ -14,10 +14,10 @@ const schema = new mongoose.Schema(
 	{ collection: 'tweets' }
 );
 
-schema.plugin(mongoosastic, { hydrate: true, hydrateOptions: { lean: true } });
+schema.plugin(mongoosastic, { hydrate: true, hydrateOptions: { sort: '-created_at', limit: 100  } });
 
 const Tweet = mongoose.model('Tweet', schema);
 
-Tweet.search = Promise.promisify(Tweet.search, { context: Tweet });
+Tweet.search = promisify(Tweet.search);
 
 export default Tweet;

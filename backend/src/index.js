@@ -1,5 +1,4 @@
 import regeneratorRuntime from 'regenerator-runtime'; // eslint-disable-line no-unused-vars
-import bodyParser from 'body-parser';
 import cors from 'cors';
 import express from 'express';
 import mongoose from 'mongoose';
@@ -26,24 +25,10 @@ const db = mongoose.connection;
 db.on('error', logger.error.bind(logger, 'Mongo connection error:'));
 db.once('open', logger.log.bind(logger, 'Mongo connection established'));
 
+// TODO add comment
 scheduler();
 
 app.use(cors());
-app.use(bodyParser.json());
-
-app.post('/tweets', async (req, res) => {
-	try {
-		const tweets = req.body.statuses;
-		if (tweets.length > 0) {
-			tweets.forEach(async tweet => {
-				await mongoDbAdapter.saveTweet(tweet);
-			});
-		}
-	} catch (err) {
-		logger.error('Error in /tweets POST: ', err);
-		res.sendStatus(500);
-	}
-});
 
 app.get('/search', async (req, res) => {
 	const query = req.query.q;
