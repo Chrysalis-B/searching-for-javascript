@@ -30,7 +30,7 @@ twitterScheduler();
 app.use(cors());
 
 app.get('/search', async (req, res) => {
-	const query = req.query.q;
+	const query = decodeURIComponent(req.query.q);
 	if (!query || query.length === 0) {
 		return res.sendStatus(400);
 	}
