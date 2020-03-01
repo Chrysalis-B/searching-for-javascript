@@ -3,14 +3,12 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import express from 'express';
 import mongoose from 'mongoose';
-// import { Client } from '@elastic/elasticsearch';
 import scheduler from './services/twitter-scheduler';
 import mongoDbAdapter from './services/mongodb-adapter';
 import logger from './lib/logger';
 
 const port = 3001;
 const app = express();
-// const client = new Client({ node: 'http://localhost:9200' }); // eslint-disable-line no-unused-vars
 const databaseUrl = 'mongodb://localhost:27017/searching-for-javascript';
 
 (async () => {
@@ -33,7 +31,7 @@ scheduler();
 app.use(cors());
 app.use(bodyParser.json());
 
-app.post('/tweets', async req => {
+app.post('/tweets', async (req, res) => {
 	try {
 		const tweets = req.body.statuses;
 		if (tweets.length > 0) {
@@ -43,19 +41,21 @@ app.post('/tweets', async req => {
 		}
 	} catch (err) {
 		logger.error('Error in /tweets POST: ', err);
+		res.sendStatus(500);
 	}
 });
 
 app.get('/search', async (req, res) => {
+	const query = req.query.q;
+	if (!query || query.length > 0) {
+		return res.sendStatus(400);
+	}
 	try {
-		const query = req.query.q;
-		if (query.length > 0) {
-			const result = await mongoDbAdapter.searchTweets(query);
- 			res.json(result);
-		}
+		const result = await mongoDbAdapter.searchTweets(query);
+		return res.json(result);
 	} catch (err) {
 		logger.error('Error in /search GET: ', err);
-		res.status(500);
+		return res.sendStatus(500);
 	}
 });
 

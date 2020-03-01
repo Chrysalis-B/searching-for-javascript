@@ -7,7 +7,7 @@ const twitterPoster = tweets => {
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify(tweets)
 	})
-		.then(res => logger.log(res.status))
+		.then(res => logger.log(res))
 		.catch(err => logger.error(err));
 };
 

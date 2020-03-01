@@ -11,6 +11,8 @@ The repo consists of a node backend server and a React frontend.
 
 ## Setup
 
+Have mongo running on port `27017` and elasticSearch on port `9200`.
+
 To start the frontend & backend:
 
 1. `yarn`
