@@ -47,7 +47,7 @@ app.post('/tweets', async (req, res) => {
 
 app.get('/search', async (req, res) => {
 	const query = req.query.q;
-	if (!query || query.length > 0) {
+	if (!query || query.length === 0) {
 		return res.sendStatus(400);
 	}
 	try {
