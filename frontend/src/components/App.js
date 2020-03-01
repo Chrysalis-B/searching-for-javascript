@@ -9,9 +9,8 @@ import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Icon from '@material-ui/core/Icon';
-import fetchRequest from './utils/fetch';
+import fetchRequest from '../utils/fetch';
 import SearchResultsList from './SearchResultsList';
-import './App.css';
 
 function App() {
 	const [searchInput, setSearchInput] = useState('');
