@@ -1,10 +1,9 @@
+import request from 'request';
 import logger from '../lib/logger';
-
-const request = require('request');
 
 const twitterPoster = tweets => {
 	request.post(
-		process.env.TWITTER_POSTER_URI,
+		'http://localhost:3001/tweets',
 		{
 			json: tweets
 		},

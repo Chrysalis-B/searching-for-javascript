@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import mongoosastic from 'mongoosastic';
 
 const schema = new mongoose.Schema(
     {
@@ -8,10 +9,12 @@ const schema = new mongoose.Schema(
         userId: String,
         userName: String,
         userImg: String
-    },
-    { collection: 'tweets' }
-)
+    }, {collection: 'tweets'}
+);
+
+schema.plugin(mongoosastic);
 
 const Tweet = mongoose.model('Tweet', schema);
+
 
 export default Tweet;
