@@ -1,21 +1,14 @@
-import request from 'request';
+import fetch from 'node-fetch';
 import logger from '../lib/logger';
 
 const twitterPoster = tweets => {
-	request.post(
-		'http://localhost:3001/tweets',
-		{
-			json: tweets
-		},
-		(error, res, body) => {
-			if (error) {
-				logger.error(error);
-				return;
-			}
-			logger.log(`statusCode: ${res.statusCode}`);
-			logger.log(body);
-		}
-	);
+	fetch('http://localhost:3001/tweets', {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify(tweets)
+	})
+		.then(res => logger.log(res.status))
+		.catch(err => logger.error(err));
 };
 
 export default twitterPoster;

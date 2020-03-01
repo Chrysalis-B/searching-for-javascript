@@ -33,7 +33,7 @@ scheduler();
 app.use(cors());
 app.use(bodyParser.json());
 
-app.post('/tweets', req => {
+app.post('/tweets', async req => {
 	try {
 		const tweets = req.body.statuses;
 		if (tweets.length > 0) {
@@ -46,25 +46,17 @@ app.post('/tweets', req => {
 	}
 });
 
-// async function run() {
-// 	// We need to force an index refresh at this point, otherwise we will not
-// 	// get any result in the consequent search
-// 	await client.indices.refresh({ index: 'tweets' });
-
-// 	// Let's search!
-// 	const { body } = await client.search({
-// 		index: 'tweets',
-// 		// type: '_doc', // uncomment this line if you are using {es} ≤ 6
-// 		body: {
-// 			query: {
-// 				match: { text: 'Javascript' }
-// 			}
-// 		}
-// 	});
-
-// 	logger.log(body.hits.hits);
-// }
-
-// run().catch(logger.log);
+app.get('/search', async (req, res) => {
+	try {
+		const query = req.query.q;
+		if (query.length > 0) {
+			const result = await mongoDbAdapter.searchTweets(query);
+ 			res.json(result);
+		}
+	} catch (err) {
+		logger.error('Error in /search GET: ', err);
+		res.status(500);
+	}
+});
 
 app.listen(port, () => logger.log(`App is listening on port ${port}`));
