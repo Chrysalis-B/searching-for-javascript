@@ -50,11 +50,9 @@ to easily generate the token needed for the requests made on behalf of the appli
 For the frontend I decided to user create-react-app as I wanted to get up and running fast but also demonstrate skills in working with
 a framework.
 
-I decided to use the Material-UI component library. This ways I was able to implement a decent UI within time I had.
+I decided to use the Material-UI component library. This way I was able to implement a decent UI quickly.
 
-
-
-
+Unfortunately due to time constraints tests are not implemented.
 
 
 
